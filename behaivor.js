@@ -3,6 +3,8 @@
 
 let options = [];
 
+let elements_table_added = [];
+
 
 //Listener: When the user change the value of the tab_name input
 $("#tab_name").on('input', function () {
@@ -244,7 +246,7 @@ function changeOptionsForElement() {
 
             $("#table_element").change(function () {
                 showTableElementSelected();
-                
+
             });
 
             break;
@@ -281,11 +283,11 @@ function showMenu() {
 
     $("#show_element_form_action").click(function () {
         let tree_created = checkTree();
-        if(tree_created){
+        if (tree_created) {
             $("#treeNotFound").hide();
             $("#confElement").show();
         }
-        else{
+        else {
             $("#treeNotFound").show();
             $("#confElement").hide();
         }
@@ -295,7 +297,7 @@ function showMenu() {
     });
 
     $("#show_editor_code_action").click(function () {
-        
+
         $("#show_tabs_form").hide();
         $("#show_element_form").hide();
         $("#show_editor_code").show();
@@ -306,7 +308,7 @@ function showMenu() {
 function unlockElements() {
     $("#tab_selected_element").attr("disabled", false);
     $("#panel_selected_element").attr("disabled", false);
-    $("#element_selected").attr("disabled",false);
+    $("#element_selected").attr("disabled", false);
 }
 
 /* Listener for the element_name */
@@ -370,9 +372,16 @@ $("#opName, #opValue").on("input", function () {
 
 function showOptions() {
     $("#listOpts").html("");
-    for (let opt of options) {
+    if(options.length > 0){
+        for (let opt of options) {
         $("#listOpts").append("<li class='list-group-item'><b>Nombre:</b> " + opt.label + " - <b>Valor:</b> " + opt.value + "<br><button class='btn btn-danger btn-sm pull-rigth'><span class='fa fa-trash-o'></span>Eliminar</button></li>");
+        }
     }
+    else{
+        $("#listOpts").append("<li class='list-group-item'>No existe elementos agregados</li>");
+
+    }
+    
 }
 
 menuEditor();
@@ -388,109 +397,149 @@ function menuEditor() {
         let codePreviewCache = codePreview;
 
         try {
-            codePreview = JSON.parse(editor.getValue());                
+            codePreview = JSON.parse(editor.getValue());
         } catch (error) {
             codePreview = codePreviewCache;
             launchErrorModal(error);
         }
         updateEditorCode();
         $("#save_content_editor").attr("disabled", true);
-        
+
     });
 
-    $("#download_content_editor").click(function (){
-       launchJSONmodal(); 
+    $("#download_content_editor").click(function () {
+        launchJSONmodal();
     });
 }
 
 
-function showTableElementSelected(){
-        let table_element = $("#table_element option:selected").val();
-                let number_elements = [{ "element_html": "<div class=col-md-6><label class=control-label>Mínimo Numero</label><input class=form-control id=minNumber type=number></div>" },
-                { "element_html": " <div class=col-md-6><label class=control-label>Máximo Numero</label><input class=form-control id=maxNumber type=number></div>" }
-                ];
-                let text_elements = [{ "element_html": "<div class=col-md-6><label class=control-label>Max Length</label><input class=form-control id=maxLength type=number></div>" }];
+function showTableElementSelected() {
+    let table_element = $("#table_element option:selected").val();
+    let number_elements = [{ "element_html": "<div class=col-md-6><label class=control-label>Mínimo Numero</label><input class=form-control id=minNumber type=number></div>" },
+    { "element_html": " <div class=col-md-6><label class=control-label>Máximo Numero</label><input class=form-control id=maxNumber type=number></div>" }
+    ];
+    let text_elements = [{ "element_html": "<div class=col-md-6><label class=control-label>Max Length</label><input class=form-control id=maxLength type=number></div>" }];
 
-                let list_elements = [{ "element_html": "<div class=col-md-6><label class=control-label>Crear Opciones</label><select class=form-control id=options_type><option value=Si,No>Si - No<option value=Si,No,N/A>Si - No - N/A<option value=Bueno,Malo,Regular,N/A>Bueno - Malo - Regular - N/A<option value=Rural,Urbano>Rural - Urbano<option value=Custom>Otra</select><br><input class=form-control disabled id=opName placeholder='Nombre Opción'><br><input class=form-control disabled id=opValue placeholder='Valor de la Opción'> <button class='btn btn-primary'id=AddOp>Agregar                         Opción</button></div>" },
-                { "element_html": "<div class=col-md-6><label class=control-label>Opciones Creadas</label><div><ul class=list-group id=listOpts><li class=list-group-item>No existe elementos agregados</ul></div></div>" }
-                ];
+    let list_elements = [{ "element_html": "<div class=col-md-6><label class=control-label>Crear Opciones</label><select class=form-control id=options_type><option value=Si,No>Si - No<option value=Si,No,N/A>Si - No - N/A<option value=Bueno,Malo,Regular,N/A>Bueno - Malo - Regular - N/A<option value=Rural,Urbano>Rural - Urbano<option value=Custom>Otra</select><br><input class=form-control disabled id=opName placeholder='Nombre Opción'><br><input class=form-control disabled id=opValue placeholder='Valor de la Opción'> <button class='btn btn-primary'id=AddOp>Agregar                         Opción</button></div>" },
+    { "element_html": "<div class=col-md-6><label class=control-label>Opciones Creadas</label><div><ul class=list-group id=listOpts><li class=list-group-item>No existe elementos agregados</ul></div></div>" }
+    ];
 
-                $("#table_element_selected").html("");
-                options = [];
+    $("#table_element_selected").html("");
+    options = [];
+    showOptions();
+
+    switch (table_element) {
+        case "number":
+            for (let element of number_elements) {
+                $("#table_element_selected").append(element.element_html);
+            }
+
+            break;
+        case "text":
+            for (let element of text_elements) {
+                $("#table_element_selected").append(element.element_html);
+            }
+            break;
+
+        case "list":
+            for (let element of list_elements) {
+                $("#table_element_selected").append(element.element_html);
+            }
+            showFieldsforOptions();
+
+            break;
+    }
+
+    $("#btnAddEleTable").off("click");
+
+    $("#btnAddEleTable").click(function () {
+            
+                let element = $("#table_element option:selected").val();
+                let element_name = $("#table_ele_name").val();
+                let size_sm = $("#element_size_small option:selected").val();
+                let size_md = $("#element_size_medium option:selected").val();
+                let size_lg = $("#element_size_lg option:selected").val();
+                let autofocus = $("#element_autofocus").is(":checked");
+                let required = $("#element_required").is(":checked");
+                let disabled = $("#element_disabled").is(":checked");
+                let readOnly = $("#element_readOnly").is(":checked");
+                elements_table_added.push(addElementTable( element, element_name, size_sm, size_md, size_lg, autofocus, required, disabled, readOnly));
+                showTableElementsAdded();
+                options=[];
                 showOptions();
 
-                switch (table_element) {
-                    case "number":
-                        for (let element of number_elements) {
-                            $("#table_element_selected").append(element.element_html);
-                        }
-                        break;
-                    case "text":
-                         for (let element of text_elements) {
-                            $("#table_element_selected").append(element.element_html);
-                        } 
-                        break;
-
-                    case "list":
-                       for (let element of list_elements) {
-                            $("#table_element_selected").append(element.element_html);
-                        } 
-                        showFieldsforOptions();
-
-                        break;       
-                }
+            });
 }
 
-function showFieldsforOptions(){
+function showFieldsforOptions() {
     $("#options_type").change(function () {
-                let option_selected = $("#options_type option:selected").val();
+        let option_selected = $("#options_type option:selected").val();
 
-                switch (option_selected) {
+        switch (option_selected) {
 
-                    case "Custom":
-                        $("#opName").attr("disabled", false);
-                        $("#opValue").attr("disabled", false);
-                        break;
-                }
+            case "Custom":
+                $("#opName").attr("disabled", false);
+                $("#opValue").attr("disabled", false);
+                break;
+        }
 
-            });
+    });
 
-            $("#AddOp").click(function () {
-                let option_selected = $("#options_type option:selected").val();
-                switch (option_selected) {
+    $("#AddOp").click(function () {
+        let option_selected = $("#options_type option:selected").val();
+        switch (option_selected) {
 
-                    case "Si,No":
-                        options.push({ "label": "Si", "value": "Si" });
-                        options.push({ "label": "No", "value": "No" });
-                        showOptions();
-                        break;
-                    case "Si,No,N/A":
-                        options.push({ "label": "Si", "value": "Si" });
-                        options.push({ "label": "No", "value": "No" });
-                        options.push({ "label": "N/A", "value": "N/A" });
-                        showOptions();
-                        break;
-                    case "Bueno,Malo,Regular,N/A":
-                        options.push({ "label": "Bueno", "value": "Bueno" });
-                        options.push({ "label": "Malo", "value": "Malo" });
-                        options.push({ "label": "Regular", "value": "Regular" });
-                        options.push({ "label": "N/A", "value": "N/A" });
-                        showOptions();
-                        break;
-                    case "Rural,Urbano":
-                        options.push({ "label": "Rural", "value": "Rural" });
-                        options.push({ "label": "Urbano", "value": "Urbano" });
-                        showOptions();
-                        break;
-                    case "Custom":
-                        let opName = $("#opName").val();
-                        let opValue = $("#opValue").val();
-                        options.push({ "label": opName, "value": opValue });
-                        showOptions();
-                        break;
-                }
+            case "Si,No":
+                options.push({ "label": "Si", "value": "Si" });
+                options.push({ "label": "No", "value": "No" });
+                showOptions();
+                break;
+            case "Si,No,N/A":
+                options.push({ "label": "Si", "value": "Si" });
+                options.push({ "label": "No", "value": "No" });
+                options.push({ "label": "N/A", "value": "N/A" });
+                showOptions();
+                break;
+            case "Bueno,Malo,Regular,N/A":
+                options.push({ "label": "Bueno", "value": "Bueno" });
+                options.push({ "label": "Malo", "value": "Malo" });
+                options.push({ "label": "Regular", "value": "Regular" });
+                options.push({ "label": "N/A", "value": "N/A" });
+                showOptions();
+                break;
+            case "Rural,Urbano":
+                options.push({ "label": "Rural", "value": "Rural" });
+                options.push({ "label": "Urbano", "value": "Urbano" });
+                showOptions();
+                break;
+            case "Custom":
+                let opName = $("#opName").val();
+                let opValue = $("#opValue").val();
+                options.push({ "label": opName, "value": opValue });
+                showOptions();
+                break;
+        }
 
-                $("#addElement").attr("disabled", false);
+        $("#addElement").attr("disabled", false);
 
-            });
+    });
+}
+
+function showTableElementsAdded(){
+    $("#table_elements_added").html("");
+    for(let element of elements_table_added){
+        switch(element.type){
+            case "text": case "number":
+            $("#table_elements_added").append("<li class='list-group-item'><b>Nombre:</b> " + element.label.value + " - <b> Type :</b> " + element.type + "<br><button class='btn btn-danger btn-sm pull-rigth'><span class='fa fa-trash-o'></span>Eliminar</button></li>");
+            break;
+            case "list":
+            let listOptions = "";
+            for (let options of element.options){
+                listOptions += "<li> <b>Label:</b>"+options.label + " - <b> Valor: </b>"+ options.value + "</li>"; 
+            }
+            $("#table_elements_added").append("<li class='list-group-item'><b>Nombre:</b> " + element.label.value + " - <b> Type :</b> " + element.type + "<br> <ul> "+ listOptions + "<ul><br><button class='btn btn-danger btn-sm pull-rigth'><span class='fa fa-trash-o'></span>Eliminar</button></li>");
+            
+            }
+    }
+
 }

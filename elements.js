@@ -39,8 +39,9 @@ function showListFields() {
 }
 
 function showTableFields() {
-    let fields = [{ "element_html": "<div class=col-md-6><label class=control-label>Selecciona el Elemento</label><select class=form-control id=table_element><option value=number selected>Number<option value=text>Text<option value=list>List</select><input class=form-control id=table_ele_name                          placeholder='Nombre Elemento'><button class='btn btn-primary'id=btnAddEleTable>Agregar Elemento</button></div>" },
-    { "element_html": "<div class='col-md-6' id='table_element_selected'></div>" }
+    let fields = [{ "element_html": "<div class=col-md-6><label class=control-label>Selecciona el Elemento</label><select class=form-control id=table_element><option value=number selected>Number<option value=text>Text<option value=list>List</select><input class=form-control id=table_ele_name                          placeholder='Nombre Elemento'><button class='btn btn-primary'id=btnAddEleTable>Agregar</button></div>" },
+    { "element_html": "<div class='col-md-6' id='table_element_selected'></div>" },
+    { "element_html": "<div class='col-md-12'><ul class='list-group' id='table_elements_added'><li class='list-group-item'>No existe elementos agregados a la tabla</li></ul></div>" }
     ];
     return fields;
 }
@@ -135,6 +136,51 @@ function addElement(tab_id, panel_id, element, element_name, size_sm, size_md, _
     launchModal("Se ha agregado el elemento correctamente");
     setIDdiv();
 
+};
+
+function addElementTable(element, element_name, size_sm, size_md, _size_lg, autofocus, required, disabled, readOnly) {
+
+    let sys_ele_name = generateID(element_name, "element");
+
+    let elementObj = {};
+
+    elementObj["label"] = { "class": "control-label", "value": element_name };
+    elementObj["idDiv"] = getIDdiv();
+    elementObj["divClass"] = size_sm + " " + size_md + " " + _size_lg + " form-group";
+    elementObj["id"] = sys_ele_name;
+    elementObj["class"] = "form-control";
+    elementObj["name"] = sys_ele_name;
+    elementObj["type"] = element;
+    elementObj["autofocus"] = autofocus;
+    elementObj["list"] = { "id": "", "options": [] }
+    elementObj["readOnly"] = readOnly;
+    elementObj["required"] = required;
+
+    switch (element) {
+
+        
+        case "text":    
+            let textInfo = getTextInfo();
+            elementObj["maxLength"] = textInfo.maxLength;
+            break;
+
+        case "number":
+            let numberInfo = getNumberInfo();
+            elementObj["min"] = numberInfo.min;
+            elementObj["max"] = numberInfo.max;
+            break;
+
+       case "list":
+            let listInfo = getListInfo();
+            elementObj["options"] = listInfo.options;
+            elementObj["service"] = listInfo.service;
+            break;      
+    }
+    
+    //launchModal("Se ha agregado el elemento a la tabla correctamente");
+    setIDdiv();
+
+    return elementObj;
 };
 
 
