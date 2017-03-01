@@ -117,7 +117,15 @@ function addElement(tab_id, panel_id, element, element_name, size_sm, size_md, _
             let image2LabelInfo = getImage2LabelInfo();
             elementObj["labels"] = {"firstLabel":image2LabelInfo.firstLabel, "secondLabel":image2LabelInfo.secondLabel};
             break;       
+    
+    case "table":
+           let tableInfo= getTableInfo();
+           elementObj["class"]="table table-bordered";
+           elementObj["elements"]=tableInfo.elements;
+           break;
+
     }
+    
 
     for (let tab of codePreview.tabs) {
         if (tab.navtab[0].location == tab_id) {
@@ -243,4 +251,29 @@ function getImage2LabelInfo(){
     image2LabelInfo["firstLabel"] = $("#label_1").val();
     image2LabelInfo["secondLabel"] = $("#label_2").val();
     return image2LabelInfo;
+}
+
+function getTableInfo(){
+    let tableInfo = [];
+    elements_table_added.push({
+            "label": {
+                "class": "control-label",
+                "value": "Agregar"
+            },
+            "idDiv": getIDdiv(),
+            "divClass": "col-md-3",
+            "id": "buttonTableElement"+getIDElement(),
+            "class": "btn btn-default",
+            "name": "buttonTableElement"+getIDElement(),
+            "disabled": false,
+            "type": "button",
+            "autofocus": true,
+            "readOnly": false
+        });
+
+    tableInfo["elements"]=elements_table_added;
+
+    setIDdiv();
+    setIDElement();
+    return tableInfo;
 }

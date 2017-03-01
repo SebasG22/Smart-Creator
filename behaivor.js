@@ -246,7 +246,6 @@ function changeOptionsForElement() {
 
             $("#table_element").change(function () {
                 showTableElementSelected();
-
             });
 
             break;
@@ -344,6 +343,9 @@ $("#addElement").click(function () {
     addElement(tab_id, panel_id, element, element_name, size_sm, size_md, size_lg, autofocus, required, disabled, readOnly);
     updateEditorCode();
     $("#element_name").val("");
+    options =[];
+    elements_table_added = [];
+    showTableElementsAdded();
 });
 
 
@@ -427,6 +429,7 @@ function showTableElementSelected() {
     $("#table_element_selected").html("");
     options = [];
     showOptions();
+    showTableElementsAdded();
 
     switch (table_element) {
         case "number":
@@ -467,6 +470,23 @@ function showTableElementSelected() {
                 showTableElementsAdded();
                 options=[];
                 showOptions();
+
+                $("#table_ele_name").val("");
+                switch(element){
+                    case "number":
+                    $("#minNumber").val("");
+                    $("#maxNumber").val("");
+                    break;
+
+                    case"text":
+                    $("#maxLength").val("");
+                    break;
+
+                    case"list":
+                    $("#opName").val("");
+                    $("#opValue").val("");
+                    break;
+                }
 
             });
 }
