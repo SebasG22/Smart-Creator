@@ -388,13 +388,12 @@ function menuEditor() {
         let codePreviewCache = codePreview;
 
         try {
-            codePreview = JSON.parse(editor.getValue());
-            executeEngine(codePreview);    
+            codePreview = JSON.parse(editor.getValue());                
         } catch (error) {
             codePreview = codePreviewCache;
-            updateEditorCode();
             launchErrorModal(error);
         }
+        updateEditorCode();
         $("#save_content_editor").attr("disabled", true);
         
     });
