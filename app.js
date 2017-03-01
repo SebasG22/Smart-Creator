@@ -38,9 +38,12 @@ function generateID(id_user, typeElement) {
     let id_sys;
     id_sys = id_user.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
     id_sys = id_sys.replace(/\./g, "");
+    id_sys = id_sys.replace(/\,/g, "");
+    id_sys = id_sys.replace(/\;/g, "");
     id_sys = id_sys.replace(/\(/g, "");
     id_sys = id_sys.replace(/\)/g, "");
     id_sys = id_sys.replace(/\d/g, "");
+    id_sys = id_sys.replace(/\:/g, "");
     id_sys = (id_sys.replace(/\s/g, "") + getIDElement() + typeElement).toLowerCase();
     setIDElement();
     return id_sys;
