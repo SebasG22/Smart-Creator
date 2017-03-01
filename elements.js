@@ -185,7 +185,7 @@ function addElementTable(element, element_name, size_sm, size_md, _size_lg, auto
             break;      
     }
     
-    //launchModal("Se ha agregado el elemento a la tabla correctamente");
+    launchModal("Se ha agregado el elemento a la tabla correctamente");
     setIDdiv();
 
     return elementObj;
