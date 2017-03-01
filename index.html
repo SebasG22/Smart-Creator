@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Template Creator Smart Docs </title>
+
+    <!-- Adding Styles -->
+    <link rel="stylesheet" type="text/css" href="src/libs/css/lato_font.css" />
+    <link rel="stylesheet" type="text/css" href="src/libs/css/roboto_condensed_font.css" />
+    <link rel="stylesheet" type="text/css" href="src/libs/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="src/libs/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="src/libs/css/animate.min.css" />
+    <link rel="stylesheet" type="text/css" href="src/libs/css/bootstrap-switch.min.css" />
+    <link rel="stylesheet" type="text/css" href="src/libs/css/checkbox3.min.css" />
+    <link rel="stylesheet" type="text/css" href="src/libs/css/select2.min.css" />
+    <link rel="stylesheet" type="text/css" href="src/libs/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="src/libs/css/flat-blue.css" />
+
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="src/libs/js/ace-2.js">
+
+    </script>
+    <script>
+        window.define = ace.define;
+    </script>
+    <script src="src/libs/js/theme-monokai.js"></script>
+    <script src="src/libs/js/mode-javascript.js"></script>
+    <script src="src/libs/js/mode-hjson.js"></script>
+    <script src="src/smartEngineV2.js"></script>
+    <script src="app.js"></script>
+    <script src="tabs.js"></script>
+    <script src="panel.js"></script>
+    <script src="elements.js"></script>
+
+    <script src="src/libs/js/app.js"></script>
+    <script src="src/libs/js/bootstrap.min.js"></script>
+    <script src="src/libs/js/bootstrap-switch.min.js"></script>
+    <script src="src/libs/js/jquery.matchHeight-min.js"></script>
+
+</head>
+
+<body class="flat-blue">
+
+    <div class='app-container'>
+        <div class='row content-container'>
+            <nav class="navbar navbar-default navbar-fixed-top navbar-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-expand-toggle">
+                <i class="fa fa-bars icon"></i>
+            </button>
+                        <ol class="breadcrumb navbar-breadcrumb">
+                            <li class="active" id="pageName">Smart Creator</li>
+                        </ol>
+                        <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
+                <i class="fa fa-th icon"></i>
+            </button>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
+                <i class="fa fa-times icon"></i>
+            </button>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" role="button" aria-expanded="false" id="userFullname">Logged: Local User</a>
+
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="side-menu sidebar-inverse">
+                <div class="side-menu sidebar-inverse">
+                    <nav class="navbar navbar-default" role="navigation">
+                        <div class="side-menu-container">
+                            <div class="navbar-header">
+                                <a class="navbar-brand" href="">
+                                    <div class="icon fa fa fa-connectdevelop"></div>
+                                    <div class="title">Smart Docs @Devs</div>
+                                </a>
+                                <button type="button" class="navbar-expand-toggle pull-right visible-xs">
+                        <i class="fa fa-times icon"></i>
+                    </button>
+                            </div>
+                            <ul class="nav navbar-nav">
+                                <li id="itemInicio" style="cursor: pointer">
+                                    <a>
+                                        <span class="icon fa fa-tachometer"></span><span class="title">Smart Creator</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <!-- /.navbar-collapse -->
+                    </nav>
+                </div>
+            </div>
+            <!-- Main Content -->
+            <div id="mainContent" class="container-fluid">
+
+                <div class="side-body">
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="card">
+                                <div class="card-header">
+
+                                </div>
+                                <div class="card-body">
+                                    <div class="text-center">
+                                        <div class="col-md-4 col-sm-6" id="show_tabs_form_action" style="cursor:pointer">
+                                            <span class="fa-stack fa-lg fa-2x">
+                  <i class="fa fa-circle-thin fa-stack-2x"></i>
+                  <i class="fa fa-columns fa-stack-1x"></i>
+                </span>
+
+
+                                            <h4>Pestanas y Paneles</h4>
+
+                                        </div>
+                                        <!-- /.col-lg-4 -->
+                                        <div class="col-md-4 col-sm-6" id="show_element_form_action" style="cursor:pointer">
+                                            <span class="fa-stack fa-lg fa-2x">
+                  <i class="fa fa-circle-thin fa-stack-2x"></i>
+                  <i class="fa fa-code-fork fa-stack-1x"></i>
+                </span>
+                                            <h4>Elementos</h4>
+
+                                        </div>
+                                        <!-- /.col-lg-4 -->
+                                        <div class="col-md-4 col-sm-6" id="show_editor_code_action" style="cursor:pointer">
+                                            <span class="fa-stack fa-lg fa-2x">
+                  <i class="fa fa-circle-thin fa-stack-2x"></i>
+                  <i class="fa fa-code fa-stack-1x"></i>
+                </span>
+                                            <h4>Editor Codigo</h4>
+
+                                        </div>
+                                        <!-- /.col-lg-4 -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+<div class="row" id="show_tabs_form">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">
+
+                                        <div class="title" id="titleStep">Paso 1 : Crea pestanas </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="card-body">
+
+                                    <div id="confElement">
+
+                                        <div class="form-group col-md-12">
+                                            <label>Nombre</label>
+                                            <input type="text" id="tab_name" class="form-control" placeholder="Ingresa el nombre de la pestaña">
+                                        </div>
+
+                                        <div class="pull-right">
+                                            <button type="submit" id="addTab" class="btn btn-primary" disabled="true">Agregar Pestaña</button>
+                                        </div>
+                                        <div class="form-group col-md-12" style="visibility: hidden">
+                                            <label>Nombre</label>
+                                            <input type="text" class="form-control" placeholder="Ingresa el nombre de la pestaña">
+                                        </div>
+                                        <!--
+                                        <div class="sub-title">Pestanas Creadas</div>
+                                        <div>
+                                            <ul class="list-group">
+                                                <li class="list-group-item">
+                                                    <span class="badge" style="background-color: white"><button class="btn btn-sm btn-success">
+                                                        <span class="fa fa-edit" title="Actualizar"></span>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger">
+                                                        <span class="fa fa-trash-o" title="Eliminar"></span>
+                                                        </button></span>
+                                                    Tab 1 Name
+                                                    <p>&nbsp</p>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <span class="badge" style="background-color: white"><button class="btn btn-sm btn-success">
+                                                        <span class="fa fa-edit" title="Actualizar"></span>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger">
+                                                        <span class="fa fa-trash-o" title="Eliminar"></span>
+                                                        </button></span>
+                                                    Tab 1 Name
+                                                    <p>&nbsp</p>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <span class="badge" style="background-color: white"><button class="btn btn-sm btn-success">
+                                                        <span class="fa fa-edit" title="Actualizar"></span>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger">
+                                                        <span class="fa fa-trash-o" title="Eliminar"></span>
+                                                        </button></span>
+                                                    Tab 1 Name
+                                                    <p>&nbsp</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">
+
+                                        <div class="title" id="titleStep">Paso 2. Agrega Paneles</div>
+                                    </div>
+
+
+                                </div>
+                                <div class="card-body">
+
+                                    <div id="confElement">
+
+                                        <div class="form-group col-md-12">
+                                            <label>Nombre</label>
+                                            <input type="text" id="panel_name" class="form-control" placeholder="Ingresa el nombre del panel" disabled="true">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Pestaña</label>
+                                            <select class="form-control" id="tab_selected" disabled="true">
+                                                </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Tipo Panel</label>
+                                            <select class="form-control" id="panel_type" disabled="true">
+                                                <option selected="" value="panel panel-default">Default</option>
+                                                <option value="panel panel-primary">Primary</option>
+                                                <option value="panel panel-sucess">Success</option>
+                                                <option value="panel panel-information">Information</option>
+                                                <option value="panel panel-warning">Warning</option>
+                                                <option value="panel panel-danger">Danger</option>
+                                                </select>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="pull-right">
+                                        <button type="submit" id="addPanel" class="btn btn-primary" disabled="true">Agregar Panel</button>
+                                    </div>
+
+                                    <!--
+                                    <div class="sub-title">Paneles Creados</div>
+                                    <div>
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                <span class="badge" style="background-color: white"><button class="btn btn-sm btn-success">
+                                                        <span class="fa fa-edit" title="Actualizar"></span>
+                                                </button>
+                                                <button class="btn btn-sm btn-danger">
+                                                        <span class="fa fa-trash-o" title="Eliminar"></span>
+                                                        </button></span>
+                                                Tab 1 Name
+                                                <p>&nbsp</p>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <span class="badge" style="background-color: white"><button class="btn btn-sm btn-success">
+                                                        <span class="fa fa-edit" title="Actualizar"></span>
+                                                </button>
+                                                <button class="btn btn-sm btn-danger">
+                                                        <span class="fa fa-trash-o" title="Eliminar"></span>
+                                                        </button></span>
+                                                Tab 1 Name
+                                                <p>&nbsp</p>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <span class="badge" style="background-color: white"><button class="btn btn-sm btn-success">
+                                                        <span class="fa fa-edit" title="Actualizar"></span>
+                                                </button>
+                                                <button class="btn btn-sm btn-danger">
+                                                        <span class="fa fa-trash-o" title="Eliminar"></span>
+                                                        </button></span>
+                                                Tab 1 Name
+                                                <p>&nbsp</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    -->
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row" id="show_element_form">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">
+
+                                        <div class="title" id="titleStep">Paso 3 : Agrega Elementos </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="card-body">
+
+                                    <div id="confElement">
+
+                                        <div class="col-md-3">
+                                            <label>Tipo de Elemento:</label>
+
+                                            <select class="form-control" id="element_selected">
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label>Pestana:</label>
+
+                                            <select class="form-control" id="tab_selected_element" disabled=true ></select>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label>Panel:</label>
+
+                                            <select class="form-control" id="panel_selected_element" disabled=true > </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="checkbox-check checkbox-inline checkbox-light checkbox3">
+                                                <input id="element_autofocus" type="checkbox" checked="">
+                                                <label for="element_autofocus">AutoFocus</label>
+                                            </div>
+                                            <div class="checkbox-check checkbox-inline checkbox-light checkbox3">
+                                                <input id="element_req" type="checkbox">
+                                                <label for="element_required">Required</label>
+                                            </div>
+                                            <div class="checkbox-check checkbox-inline checkbox-light checkbox3">
+                                                <input id="element_disabled" type="checkbox">
+                                                <label for="element_disabled">Disabled</label>
+                                            </div>
+                                            <div class="checkbox-check checkbox-inline checkbox-light checkbox3">
+                                                <input id="element_readOnly" type="checkbox">
+                                                <label for="element_readOnly">Read Only</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <label>Nombre</label>
+                                            <input type="text" id="element_name" class="form-control" placeholder="Ingresa el nombre del elemento">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="control-label">Tamaño: <small>Small Devices</small> </label>
+                                            <select class="form-control" id="element_size_small">
+                                                <option value="col-sm-1">1 Espacio</option>
+                                                <option value="col-sm-2">2 Espacios</option>
+                                                <option value="col-sm-3">3 Espacios</option>
+                                                <option value="col-sm-4">4 Espacios</option>
+                                                <option value="col-sm-5">5 Espacios</option>
+                                                <option value="col-sm-6">6 Espacios</option>
+                                                <option value="col-sm-7">7 Espacios</option>
+                                                <option value="col-sm-8">8 Espacios</option>
+                                                <option value="col-sm-9">9 Espacios</option>
+                                                <option value="col-sm-10">10 Espacios</option>
+                                                <option value="col-sm-11">11 Espacios</option>
+                                                <option value="col-sm-12" selected="">12 Espacios</option>
+                                             </select>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <label class="control-label">Tamaño: <small>Medium Devices</small></label>
+                                            <select class="form-control" id="element_size_medium">
+                                                <option value="col-sm-1">1 Espacio</option>
+                                                <option value="col-sm-2">2 Espacios</option>
+                                                <option value="col-sm-3">3 Espacios</option>
+                                                <option value="col-sm-4">4 Espacios</option>
+                                                <option value="col-sm-5">5 Espacios</option>
+                                                <option value="col-sm-6" selected="">6 Espacios</option>
+                                                <option value="col-sm-7">7 Espacios</option>
+                                                <option value="col-sm-8">8 Espacios</option>
+                                                <option value="col-sm-9">9 Espacios</option>
+                                                <option value="col-sm-10">10 Espacios</option>
+                                                <option value="col-sm-11">11 Espacios</option>
+                                                <option value="col-sm-12">12 Espacios</option>
+                                             </select>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <label class="control-label">Tamaño: <small>Big Devices</small></label>
+                                            <select class="form-control" id="element_size_lg">
+                                                <option value="col-sm-1">1 Espacio</option>
+                                                <option value="col-sm-2">2 Espacios</option>
+                                                <option value="col-sm-3">3 Espacios</option>
+                                                <option value="col-sm-4">4 Espacios</option>
+                                                <option value="col-sm-5">5 Espacios</option>
+                                                <option value="col-sm-6" selected="">6 Espacios</option>
+                                                <option value="col-sm-7">7 Espacios</option>
+                                                <option value="col-sm-8">8 Espacios</option>
+                                                <option value="col-sm-9">9 Espacios</option>
+                                                <option value="col-sm-10">10 Espacios</option>
+                                                <option value="col-sm-11">11 Espacios</option>
+                                                <option value="col-sm-12">12 Espacios</option>
+                                             </select>
+                                        </div>
+                                        <div class="card-footer">
+
+                                            <div class="col-md-12">
+                                                <hr>
+                                                <h4>Configuracion Avanzada </h4>
+                                                <hr>
+                                            </div>
+                                            <div class="col-md-12" id="element_config">
+
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                &nbsp
+                                                <br>
+                                                <button id="addElement" class="btn btn-primary pull-right" disabled=true >Agregar Elemento</button> &nbsp
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row" id="show_editor_code">
+
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">
+
+                                        <div class="title" id="titleStep2">Editor de Codigo</div>
+
+                                    </div>
+                                    <div class="pull-right">
+                                        <button class="btn btn-primary"><span class="fa fa-file-o"></span> Descargar</button>
+                                        <button id="edit_content_editor" class="btn btn-warning"><span class="fa fa-edit"></span> Editar</button>
+                                        <button id="save_content_editor" class="btn btn-primary" disabled=true><span class="fa fa-save"></span> Guardar</button>
+
+
+
+                                    </div>
+
+
+
+                                </div>
+                                <div class="card-body">
+
+                                    <div id="editor" class="panel-body" style="width: 100%;height: 500px">
+                                        <textarea style="width: 100%;">Aqui vas a poder editar el codigo generado</textarea>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">
+                                        <div class="title"> Vista Previa
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="card-body no-padding">
+                                    <div role="tabpanel" class="tab tabs-left">
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs" role="tablist" id="templateNavTabs">
+                          </ul>
+                          <!-- Tab panes -->
+                          <div class="tab-content" id="templateTabsPanel">
+                          </div>
+                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    
+
+                    
+
+
+
+
+                    <footer class="app-footer">
+                        <div class="wrapper">
+                            <span class="pull-right">Smart Version 1.3 <a href=""><i class="fa fa-long-arrow-up"></i></a></span>                            © 2017 Created By : Sebastian Guevara OSS IT Huawei Colombia Member.
+                        </div>
+                    </footer>
+
+
+                </div>
+            </div>
+
+
+            <script src="behaivor.js"></script>
+
+            <script>
+                var editor = ace.edit("editor");
+editor.setTheme("ace/theme/monokai");
+editor.getSession().setMode("ace/mode/hjson");
+editor.setReadOnly(true);
+            </script>
+
+</body>
+
+</html>
