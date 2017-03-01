@@ -60,3 +60,15 @@ function getCodePreview(){
     return codePreview;
 }
 
+function checkTree(){
+    if(codePreview.tabs[0] != undefined){
+        if(codePreview.tabs[0].panel[0].subpanel.length > 0){
+           return true;
+        }
+         return false;
+    }
+    else{
+        return false;
+    }
+}
+

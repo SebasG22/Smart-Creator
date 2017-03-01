@@ -280,12 +280,22 @@ function showMenu() {
     });
 
     $("#show_element_form_action").click(function () {
+        let tree_created = checkTree();
+        if(tree_created){
+            $("#treeNotFound").hide();
+            $("#confElement").show();
+        }
+        else{
+            $("#treeNotFound").show();
+            $("#confElement").hide();
+        }
         $("#show_tabs_form").hide();
         $("#show_element_form").show();
         $("#show_editor_code").hide();
     });
 
     $("#show_editor_code_action").click(function () {
+        
         $("#show_tabs_form").hide();
         $("#show_element_form").hide();
         $("#show_editor_code").show();
@@ -296,6 +306,7 @@ function showMenu() {
 function unlockElements() {
     $("#tab_selected_element").attr("disabled", false);
     $("#panel_selected_element").attr("disabled", false);
+    $("#element_selected").attr("disabled",false);
 }
 
 /* Listener for the element_name */
