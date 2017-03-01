@@ -46,6 +46,7 @@ function generateID(id_user, typeElement) {
     return id_sys;
 }
 
+/* Launch Sucess Modal */
 function launchModal(msg) {
 
     $("#opSuccess").remove();
@@ -53,6 +54,17 @@ function launchModal(msg) {
     $("body").append("<div class='fade modal modal-success'aria-hidden=true aria-labelledby=myModalLabel1 id=opSuccess role=dialog style=display:block tabindex=-1><div class=modal-dialog><div class=modal-content><div class=modal-header><h4 class=modal-title id=myModalLabel13>Operacion Exitosa </h4></div><div class=modal-body><img src='src/images/tick_mark-128.png' style=margin-left:auto;margin-right:auto;display:block width=150px><h4 style=text-align:center>" + msg + "</h4><h5 style=text-align:center>Buen trabajo, Sigue agregando más componentes !<br>Haz que tu plantilla sea la mejor experiencia para todos los usuarios .</h5></div><div class=modal-footer><input class='btn btn-sucess'data-dismiss=modal type=button value=Continuar></div></div></div></div>");
 
     $("#opSuccess").modal('show');
+
+}
+
+/* Launch Error Modal */
+function launchErrorModal(msg) {
+
+    $("#opError").remove();
+
+    $("body").append("<div class='fade modal modal-danger'aria-hidden=true aria-labelledby=myModalLabel2 id=opError role=dialog style=display:block tabindex=-1><div class=modal-dialog><div class=modal-content><div class=modal-header><h4 class=modal-title id=myModalLabel13>Upps, ha ocurrido un error </h4></div><div class=modal-body><img src='src/images/error-128.png' style=margin-left:auto;margin-right:auto;display:block width=150px><h4 style=text-align:center> Codigo No valido ! </h4><h5 style=text-align:center>"+msg+"</h5></div><div class=modal-footer><input class='btn btn-sucess'data-dismiss=modal type=button value=Revisar Codigo></div></div></div></div>");
+
+    $("#opError").modal('show');
 
 }
 

@@ -385,8 +385,18 @@ function menuEditor() {
 
     $("#save_content_editor").click(function () {
         editor.setReadOnly(true);
-        codePreview = JSON.parse(editor.getValue());
+        let codePreviewCache = codePreview;
+
+        try {
+            codePreview = JSON.parse(editor.getValue());
+            executeEngine(codePreview);    
+        } catch (error) {
+            codePreview = codePreviewCache;
+            updateEditorCode();
+            launchErrorModal(error);
+        }
         $("#save_content_editor").attr("disabled", true);
+        
     });
 
     $("#download_content_editor").click(function (){
