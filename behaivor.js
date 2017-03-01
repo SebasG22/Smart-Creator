@@ -400,6 +400,11 @@ function menuEditor() {
 
         try {
             codePreview = JSON.parse(editor.getValue());
+            launchModal("Se ha agregado el codigo correctamente");
+            unlockPanels();
+            unlockElements();
+            fillTabs();
+            allPanels();
         } catch (error) {
             codePreview = codePreviewCache;
             launchErrorModal(error);
