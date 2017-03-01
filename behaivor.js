@@ -388,6 +388,10 @@ function menuEditor() {
         codePreview = JSON.parse(editor.getValue());
         $("#save_content_editor").attr("disabled", true);
     });
+
+    $("#download_content_editor").click(function (){
+       launchJSONmodal(); 
+    });
 }
 
 
