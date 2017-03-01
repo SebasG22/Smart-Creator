@@ -376,7 +376,7 @@ function showOptions() {
     $("#listOpts").html("");
     if(options.length > 0){
         for (let opt of options) {
-        $("#listOpts").append("<li class='list-group-item'><b>Nombre:</b> " + opt.label + " - <b>Valor:</b> " + opt.value + "<br><button class='btn btn-danger btn-sm pull-rigth'><span class='fa fa-trash-o'></span>Eliminar</button></li>");
+        $("#listOpts").append("<li class='list-group-item'><b>Nombre:</b> " + opt.label + " - <b>Valor:</b> " + opt.value + "<br><!--<button class='btn btn-danger btn-sm pull-rigth'><span class='fa fa-trash-o'></span>Eliminar</button>--></li>");
         }
     }
     else{
@@ -550,14 +550,14 @@ function showTableElementsAdded(){
     for(let element of elements_table_added){
         switch(element.type){
             case "text": case "number":
-            $("#table_elements_added").append("<li class='list-group-item'><b>Nombre:</b> " + element.label.value + " - <b> Type :</b> " + element.type + "<br><button class='btn btn-danger btn-sm pull-rigth'><span class='fa fa-trash-o'></span>Eliminar</button></li>");
+            $("#table_elements_added").append("<li class='list-group-item'><b>Nombre:</b> " + element.label.value + " - <b> Type :</b> " + element.type + "<br><!--<button class='btn btn-danger btn-sm pull-rigth'><span class='fa fa-trash-o'></span>Eliminar</button>--></li>");
             break;
             case "list":
             let listOptions = "";
             for (let options of element.options){
                 listOptions += "<li> <b>Label:</b>"+options.label + " - <b> Valor: </b>"+ options.value + "</li>"; 
             }
-            $("#table_elements_added").append("<li class='list-group-item'><b>Nombre:</b> " + element.label.value + " - <b> Type :</b> " + element.type + "<br> <ul> "+ listOptions + "<ul><br><button class='btn btn-danger btn-sm pull-rigth'><span class='fa fa-trash-o'></span>Eliminar</button></li>");
+            $("#table_elements_added").append("<li class='list-group-item'><b>Nombre:</b> " + element.label.value + " - <b> Type :</b> " + element.type + "<br> <ul> "+ listOptions + "<ul><br><!--<button class='btn btn-danger btn-sm pull-rigth'><span class='fa fa-trash-o'></span>Eliminar</button>--></li>");
             
             }
     }
