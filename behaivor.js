@@ -343,7 +343,7 @@ $("#addElement").click(function () {
     let size_md = $("#element_size_medium option:selected").val();
     let size_lg = $("#element_size_lg option:selected").val();
     let autofocus = $("#element_autofocus").is(":checked");
-    let required = $("#element_required").is(":checked");
+    let required = $("#element_req").is(":checked");
     let disabled = $("#element_disabled").is(":checked");
     let readOnly = $("#element_readOnly").is(":checked");
     addElement(tab_id, panel_id, element, element_name, size_sm, size_md, size_lg, autofocus, required, disabled, readOnly);
