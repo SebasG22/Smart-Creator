@@ -203,6 +203,12 @@ function changeOptionsForElement() {
                         options.push({ "label": "N/A", "value": "N/A" });
                         showOptions();
                         break;
+                    case "Bueno,Malo,N/A":
+                        options.push({ "label": "Bueno", "value": "Bueno" });
+                        options.push({ "label": "Malo", "value": "Malo" });
+                        options.push({ "label": "N/A", "value": "N/A" });
+                        showOptions();
+                        break;
                     case "Rural,Urbano":
                         options.push({ "label": "Rural", "value": "Rural" });
                         options.push({ "label": "Urbano", "value": "Urbano" });
