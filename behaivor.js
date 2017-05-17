@@ -427,7 +427,7 @@ function showTableElementSelected() {
     ];
     let text_elements = [{ "element_html": "<div class=col-md-6><label class=control-label>Max Length</label><input class=form-control id=maxLength type=number></div>" }];
 
-    let list_elements = [{ "element_html": "<div class=col-md-6><label class=control-label>Crear Opciones</label><select class=form-control id=options_type><option value=Si,No>Si - No<option value=Si,No,N/A>Si - No - N/A<option value=Bueno,Malo,Regular,N/A>Bueno - Malo - Regular - N/A<option value=Rural,Urbano>Rural - Urbano<option value=Custom>Otra</select><br><input class=form-control disabled id=opName placeholder='Nombre Opción'><br><input class=form-control disabled id=opValue placeholder='Valor de la Opción'> <button class='btn btn-primary'id=AddOp>Agregar                         Opción</button></div>" },
+    let list_elements = [{ "element_html": "<div class=col-md-6><label class=control-label>Crear Opciones</label><select class=form-control id=options_type><option value=Si,No>Si - No<option value=Si,No,N/A>Si - No - N/A<option value=Bueno,Malo,Regular,N/A>Bueno - Malo - Regular - N/A<option value=Bueno,Malo,N/A>Bueno - Malo - N/A<option value=Rural,Urbano>Rural - Urbano<option value=Custom>Otra</select><br><input class=form-control disabled id=opName placeholder='Nombre Opción'><br><input class=form-control disabled id=opValue placeholder='Valor de la Opción'> <button class='btn btn-primary'id=AddOp>Agregar                         Opción</button></div>" },
     { "element_html": "<div class=col-md-6><label class=control-label>Opciones Creadas</label><div><ul class=list-group id=listOpts><li class=list-group-item>No existe elementos agregados</ul></div></div>" }
     ];
 

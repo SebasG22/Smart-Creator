@@ -69,7 +69,7 @@ function addElement(tab_id, panel_id, element, element_name, size_sm, size_md, _
     elementObj["idDiv"] = getIDdiv();
     elementObj["divClass"] = size_sm + " " + size_md + " " + _size_lg + " form-group";
     elementObj["id"] = sys_ele_name;
-    elementObj["class"] = "form-control";
+    elementObj["class"] = (element == 'radio')? "radio3 radio-check radio-inline" :  "form-control";
     elementObj["name"] = sys_ele_name;
     elementObj["type"] = element;
     elementObj["autofocus"] = autofocus;
