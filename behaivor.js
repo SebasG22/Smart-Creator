@@ -343,7 +343,7 @@ $("#addElement").click(function () {
     addElement(tab_id, panel_id, element, element_name, size_sm, size_md, size_lg, autofocus, required, disabled, readOnly);
     updateEditorCode();
     $("#element_name").val("");
-    options =[];
+    options = [];
     elements_table_added = [];
     showTableElementsAdded();
 });
@@ -374,16 +374,16 @@ $("#opName, #opValue").on("input", function () {
 
 function showOptions() {
     $("#listOpts").html("");
-    if(options.length > 0){
+    if (options.length > 0) {
         for (let opt of options) {
-        $("#listOpts").append("<li class='list-group-item'><b>Nombre:</b> " + opt.label + " - <b>Valor:</b> " + opt.value + "<br><!--<button class='btn btn-danger btn-sm pull-rigth'><span class='fa fa-trash-o'></span>Eliminar</button>--></li>");
+            $("#listOpts").append("<li class='list-group-item'><b>Nombre:</b> " + opt.label + " - <b>Valor:</b> " + opt.value + "<br><!--<button class='btn btn-danger btn-sm pull-rigth'><span class='fa fa-trash-o'></span>Eliminar</button>--></li>");
         }
     }
-    else{
+    else {
         $("#listOpts").append("<li class='list-group-item'>No existe elementos agregados</li>");
 
     }
-    
+
 }
 
 menuEditor();
@@ -461,39 +461,39 @@ function showTableElementSelected() {
     $("#btnAddEleTable").off("click");
 
     $("#btnAddEleTable").click(function () {
-            
-                let element = $("#table_element option:selected").val();
-                let element_name = $("#table_ele_name").val();
-                let size_sm = $("#element_size_small option:selected").val();
-                let size_md = $("#element_size_medium option:selected").val();
-                let size_lg = $("#element_size_lg option:selected").val();
-                let autofocus = $("#element_autofocus").is(":checked");
-                let required = $("#element_required").is(":checked");
-                let disabled = $("#element_disabled").is(":checked");
-                let readOnly = $("#element_readOnly").is(":checked");
-                elements_table_added.push(addElementTable( element, element_name, size_sm, size_md, size_lg, autofocus, required, disabled, readOnly));
-                showTableElementsAdded();
-                options=[];
-                showOptions();
 
-                $("#table_ele_name").val("");
-                switch(element){
-                    case "number":
-                    $("#minNumber").val("");
-                    $("#maxNumber").val("");
-                    break;
+        let element = $("#table_element option:selected").val();
+        let element_name = $("#table_ele_name").val();
+        let size_sm = $("#element_size_small option:selected").val();
+        let size_md = $("#element_size_medium option:selected").val();
+        let size_lg = $("#element_size_lg option:selected").val();
+        let autofocus = $("#element_autofocus").is(":checked");
+        let required = $("#element_required").is(":checked");
+        let disabled = $("#element_disabled").is(":checked");
+        let readOnly = $("#element_readOnly").is(":checked");
+        elements_table_added.push(addElementTable(element, element_name, size_sm, size_md, size_lg, autofocus, required, disabled, readOnly));
+        showTableElementsAdded();
+        options = [];
+        showOptions();
 
-                    case"text":
-                    $("#maxLength").val("");
-                    break;
+        $("#table_ele_name").val("");
+        switch (element) {
+            case "number":
+                $("#minNumber").val("");
+                $("#maxNumber").val("");
+                break;
 
-                    case"list":
-                    $("#opName").val("");
-                    $("#opValue").val("");
-                    break;
-                }
+            case "text":
+                $("#maxLength").val("");
+                break;
 
-            });
+            case "list":
+                $("#opName").val("");
+                $("#opValue").val("");
+                break;
+        }
+
+    });
 }
 
 function showFieldsforOptions() {
@@ -532,6 +532,12 @@ function showFieldsforOptions() {
                 options.push({ "label": "N/A", "value": "N/A" });
                 showOptions();
                 break;
+            case "Bueno,Malo,N/A":
+                options.push({ "label": "Bueno", "value": "Bueno" });
+                options.push({ "label": "Malo", "value": "Malo" });
+                options.push({ "label": "N/A", "value": "N/A" });
+                showOptions();
+                break;
             case "Rural,Urbano":
                 options.push({ "label": "Rural", "value": "Rural" });
                 options.push({ "label": "Urbano", "value": "Urbano" });
@@ -550,21 +556,21 @@ function showFieldsforOptions() {
     });
 }
 
-function showTableElementsAdded(){
+function showTableElementsAdded() {
     $("#table_elements_added").html("");
-    for(let element of elements_table_added){
-        switch(element.type){
+    for (let element of elements_table_added) {
+        switch (element.type) {
             case "text": case "number":
-            $("#table_elements_added").append("<li class='list-group-item'><b>Nombre:</b> " + element.label.value + " - <b> Type :</b> " + element.type + "<br><!--<button class='btn btn-danger btn-sm pull-rigth'><span class='fa fa-trash-o'></span>Eliminar</button>--></li>");
-            break;
+                $("#table_elements_added").append("<li class='list-group-item'><b>Nombre:</b> " + element.label.value + " - <b> Type :</b> " + element.type + "<br><!--<button class='btn btn-danger btn-sm pull-rigth'><span class='fa fa-trash-o'></span>Eliminar</button>--></li>");
+                break;
             case "list":
-            let listOptions = "";
-            for (let options of element.options){
-                listOptions += "<li> <b>Label:</b>"+options.label + " - <b> Valor: </b>"+ options.value + "</li>"; 
-            }
-            $("#table_elements_added").append("<li class='list-group-item'><b>Nombre:</b> " + element.label.value + " - <b> Type :</b> " + element.type + "<br> <ul> "+ listOptions + "<ul><br><!--<button class='btn btn-danger btn-sm pull-rigth'><span class='fa fa-trash-o'></span>Eliminar</button>--></li>");
-            
-            }
+                let listOptions = "";
+                for (let options of element.options) {
+                    listOptions += "<li> <b>Label:</b>" + options.label + " - <b> Valor: </b>" + options.value + "</li>";
+                }
+                $("#table_elements_added").append("<li class='list-group-item'><b>Nombre:</b> " + element.label.value + " - <b> Type :</b> " + element.type + "<br> <ul> " + listOptions + "<ul><br><!--<button class='btn btn-danger btn-sm pull-rigth'><span class='fa fa-trash-o'></span>Eliminar</button>--></li>");
+
+        }
     }
 
 }
